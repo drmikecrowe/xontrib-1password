@@ -1,0 +1,84 @@
+
+[tool.poetry]
+name = "xontrib-1password"
+version = "0.0.1"
+description = "1password support for xonsh"
+authors = ["Mike Crowe <drmikecrowe@gmail.com>"]
+
+license = "MIT"
+readme = "README.md"
+
+repository = "https://github.com/drmikecrowe/xontrib-1password"
+keywords = ['xontrib', 'xonsh']
+classifiers = [
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Topic :: System :: Shells",
+    "Topic :: System :: System Shells",
+    "Topic :: Terminals",
+    "Programming Language :: Python :: 3",
+]
+    
+
+
+
+[tool.poetry.plugins."xonsh.xontribs"]
+"1password" = "xontrib_1password.main"
+
+
+
+[tool.poetry.urls]
+
+Homepage = "https://github.com/drmikecrowe/xontrib-1password"
+Documentation = "https://github.com/drmikecrowe/xontrib-1password/blob/master/README.md"
+Code = "https://github.com/drmikecrowe/xontrib-1password"
+"Issue tracker" = "https://github.com/drmikecrowe/xontrib-1password/issues"
+
+
+[tool.poetry.dependencies]
+python = ">=3.8"
+xonsh = ">=0.12.5"
+
+
+
+[tool.poetry.dev-dependencies]
+pytest = ">=7.0"
+
+
+
+[build-system]
+requires = ["poetry-core>=1.3.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.black]
+include = '\.pyi?$'
+force-exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.pytest_cache
+  | \.tox
+  | \.vscode
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | disk-cache.sqlite3
+)/
+'''
+
+[tool.ruff]
+select = [
+    "E",
+    "F",
+    "B", # flake8-bugbear
+    "I", # isort
+    "UP", # pyupgrade
+    "SIM", # simplify
+    "RUF", # ruff specific rules
+]

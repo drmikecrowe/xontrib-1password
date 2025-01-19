@@ -1,0 +1,39 @@
+name: Testing
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  testing:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+        python-version:
+          - "3.8"
+          - "3.9"
+          - "3.10"
+          - "3.11"
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install poetry
+      run: pipx install poetry
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }} 
+        cache: poetry
+        cache-dependency-path: pyproject.toml
+
+    - uses: pre-commit/action@v3.0.0
+    - name: Install dependencies
+      run: poetry install
+    - name: Run tests
+      run: |
+        xonsh -c "xontrib load 1password"
+        poetry run pytest
