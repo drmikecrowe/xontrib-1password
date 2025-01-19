@@ -6,6 +6,8 @@
 If you like the idea click ⭐ on the repo and <a href="https://twitter.com/intent/tweet?text=Nice%20xontrib%20for%20the%20xonsh%20shell!&url=https://github.com/drmikecrowe/xontrib-1password" target="_blank">tweet</a>.
 </p>
 
+> **ALPHA**:  This is the initial release.  Issues/pull requests are welcome.
+
 ## Introduction
 
 This xontrib adds support for 1Password secrets to the xonsh shell by utilizing the [op (1password CLI)][https://developer.1password.com/docs/cli/]. It works by allowing you to securely store and access your passwords in 1Password. To use:
