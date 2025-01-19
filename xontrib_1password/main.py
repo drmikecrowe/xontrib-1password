@@ -1,5 +1,6 @@
-from xonsh.built_ins import XonshSession
 import subprocess
+
+from xonsh.built_ins import __xonsh__
 
 
 class OnePass:
@@ -11,17 +12,19 @@ class OnePass:
         if __xonsh__.env.get("ONEPASS_ENABLED", False):
             if not self.cache:
                 result = subprocess.run(
-                    ["op", "read", self.url], capture_output=True, text=True
+                    ["op", "read", "op://" + self.url], capture_output=True, text=True
                 )
                 print(
-                    f"Your 1Password environmental secret {self.url} is live in your environment"
+                    "Your 1Password environmental secret "
+                    f"{self.url} is live in your environment"
                 )
                 self.cache = result.stdout.strip()
             return self.cache
         else:
             if self.cache:
                 print(
-                    f"Your 1Password environmental secret {self.url} is no longer in your environment"
+                    "Your 1Password environmental secret "
+                    f"{self.url} is no longer in your environment"
                 )
                 self.cache = None
-            return self.url
+            return ""
