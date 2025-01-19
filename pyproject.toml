@@ -44,7 +44,6 @@ xonsh = ">=0.12.5"
 
 
 [tool.poetry.dev-dependencies]
-pytest = ">=7.0"
 
 
 
