@@ -8,7 +8,7 @@ If you like the idea click ⭐ on the repo and <a href="https://twitter.com/inte
 
 ## Introduction
 
-This xontrib adds support for 1Password secrets to the xonsh shell. It works by allowing you to securely store and access your passwords in 1Password. To use:
+This xontrib adds support for 1Password secrets to the xonsh shell by utilizing the [op (1password CLI)][https://developer.1password.com/docs/cli/]. It works by allowing you to securely store and access your passwords in 1Password. To use:
 
 1. Store your passwords in 1Password.
 2. In your xonsh environment, reference the passwords using the OnePass function:
