@@ -10,7 +10,7 @@ If you like the idea click ⭐ on the repo and <a href="https://twitter.com/inte
 
 ## Introduction
 
-This xontrib adds support for 1Password secrets to the xonsh shell by utilizing the [op (1password CLI)][https://developer.1password.com/docs/cli/]. It works by allowing you to securely store and access your passwords in 1Password. To use:
+This xontrib adds support for 1Password secrets to the xonsh shell by utilizing the [op (1password CLI)](https://developer.1password.com/docs/cli/). It works by allowing you to securely store and access your passwords in 1Password. To use:
 
 1. Store your passwords in 1Password.
 2. In your xonsh environment, reference the passwords using the OnePass function:
@@ -25,10 +25,10 @@ $ONEPASS_ENABLED = 1
 This approach ensures your sensitive information remains secure while being easily accessible in your xonsh shell.  The URL is basically: `op://<Vault>/<title>/<field>`.  To find this, here's the commands I used to determine these fields:
 
 ```sh
-➜  xonsh op item list --format json | jq '.[].title | select(. | contains("OpenAI"))' 
-"OpenAI-API-Key"
-➜  xonsh op item get OpenAI-API-Key --format json | jq '.fields[] | select(.type == "CONCEALED") | .label'
-"api-key"
+op item list --format json | jq '.[].title | select(. | contains("OpenAI"))' 
+# "OpenAI-API-Key"
+op item get OpenAI-API-Key --format json | jq '.fields[] | select(.type == "CONCEALED") | .label'
+# "api-key"
 ```
 
 ## Installation
@@ -44,11 +44,12 @@ xpip install xontrib-1password
 
 
 This xontrib will get loaded automatically for interactive sessions.
-To stop this, set
+
+To disable autoloading:
 
 ```xsh
 $XONTRIBS_AUTOLOAD_DISABLED = ["1password", ]
-# if you have set this for other xontribs, you should append the vale
+# if you have set this for other xontribs, you should append the value
 ```
 
 
