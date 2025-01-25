@@ -1,3 +1,4 @@
+import sys
 import subprocess
 
 cache = {}
@@ -15,7 +16,7 @@ class OnePass:
                 )
                 print(
                     "Your 1Password environmental secret "
-                    f"{self.url} is live in your environment"
+                    f"{self.url} is live in your environment", file=sys.stderr
                 )
                 cache[self.url] = result.stdout.strip()
             return cache[self.url]
@@ -23,7 +24,7 @@ class OnePass:
             if self.url in cache:
                 print(
                     "Your 1Password environmental secret "
-                    f"{self.url} is no longer in your environment"
+                    f"{self.url} is no longer in your environment", file=sys.stderr
                 )
                 del cache[self.url]
             return ""
