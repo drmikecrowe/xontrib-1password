@@ -11,13 +11,14 @@ class OnePass:
         if __xonsh__.env.get("ONEPASS_ENABLED", False):
             if self.url not in cache:
                 result = subprocess.run(
-                    ["op", "read", "op://" + self.url], capture_output=True, text=True
+                    ["op", "read", self.url], capture_output=True, text=True
                 )
+                key = result.stdout.strip()
                 print(
                     "Your 1Password environmental secret "
                     f"{self.url} is live in your environment"
                 )
-                cache[self.url] = result.stdout.strip()
+                cache[self.url] = key
             return cache[self.url]
         else:
             if self.url in cache:
