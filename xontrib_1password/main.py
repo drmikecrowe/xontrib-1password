@@ -15,9 +15,12 @@ class OnePass:
                     ["op", "read", self.url], capture_output=True, text=True
                 )
                 key = result.stdout.strip()
+                if not key:
+                    raise Exception(f"Unable to retrieve and set {key}")
                 print(
                     "Your 1Password environmental secret "
-                    f"{self.url} is live in your environment", file=sys.stderr
+                    f"{self.url} is live in your environment",
+                    file=sys.stderr,
                 )
                 cache[self.url] = key
             return cache[self.url]
@@ -25,7 +28,8 @@ class OnePass:
             if self.url in cache:
                 print(
                     "Your 1Password environmental secret "
-                    f"{self.url} is no longer in your environment", file=sys.stderr
+                    f"{self.url} is no longer in your environment",
+                    file=sys.stderr,
                 )
                 del cache[self.url]
             return ""
