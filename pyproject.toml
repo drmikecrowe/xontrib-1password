@@ -1,7 +1,7 @@
 
 [tool.poetry]
 name = "xontrib-1password"
-version = "0.2.0"
+version = "0.1.5"
 description = "1password support for xonsh"
 authors = ["Mike Crowe <drmikecrowe@gmail.com>"]
 
@@ -22,11 +22,8 @@ classifiers = [
 ]
 
 
-
-
 [tool.poetry.plugins."xonsh.xontribs"]
 "1password" = "xontrib_1password.main"
-
 
 
 [tool.poetry.urls]
@@ -42,9 +39,7 @@ python = ">=3.8"
 xonsh = ">=0.12.5"
 
 
-
 [tool.poetry.dev-dependencies]
-
 
 
 [build-system]
@@ -75,9 +70,9 @@ force-exclude = '''
 select = [
     "E",
     "F",
-    "B", # flake8-bugbear
-    "I", # isort
-    "UP", # pyupgrade
+    "B",   # flake8-bugbear
+    "I",   # isort
+    "UP",  # pyupgrade
     "SIM", # simplify
     "RUF", # ruff specific rules
 ]
