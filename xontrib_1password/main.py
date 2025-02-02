@@ -1,5 +1,5 @@
-import sys
 import subprocess
+import sys
 
 cache = {}
 
@@ -7,6 +7,9 @@ cache = {}
 class OnePass:
     def __init__(self, url):
         self.url = url
+    
+    def __str__(self):
+        return self.__repr__()
 
     def __repr__(self):
         if __xonsh__.env.get("ONEPASS_ENABLED", False):
@@ -15,8 +18,6 @@ class OnePass:
                     ["op", "read", self.url], capture_output=True, text=True
                 )
                 key = result.stdout.strip()
-                if not key:
-                    raise Exception(f"Unable to retrieve and set {key}")
                 print(
                     "Your 1Password environmental secret "
                     f"{self.url} is live in your environment",
@@ -32,4 +33,4 @@ class OnePass:
                     file=sys.stderr,
                 )
                 del cache[self.url]
-            return ""
+            return self.url
