@@ -17,10 +17,11 @@ class OnePass:
         return self.__repr__()
 
     def __repr__(self):
+        cache = __xonsh__.env.get("XONTRIB_1PASSWORD_CACHE", "not_empty")
         if __xonsh__.env.get("XONTRIB_1PASSWORD_ENABLED", True):
             if self.url not in _1password_cache:
                 result = subprocess.run(["op", "read", self.url], capture_output=True, text=True)
-                key = result.stdout.strip()
+                value = result.stdout.strip()
                 if result.stderr:
                     print(f"xontrib-1password error for {self.url!r}: {result.stderr}", file=sys.stderr)
 
@@ -30,8 +31,9 @@ class OnePass:
                         f"{self.url} is live in your environment",
                         file=sys.stderr,
                     )
-                _1password_cache[self.url] = key
-            return _1password_cache[self.url]
+                if cache == "all" or (cache == "not_empty" and value):
+                    _1password_cache[self.url] = value
+            return value
         else:
             if self.url in _1password_cache:
                 if __xonsh__.env.get("XONTRIB_1PASSWORD_DEBUG", False):
