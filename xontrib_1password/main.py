@@ -12,7 +12,7 @@ class OnePass:
         return self.__repr__()
 
     def __repr__(self):
-        if __xonsh__.env.get("XONTRIB_ONEPASS_ENABLED", True):
+        if __xonsh__.env.get("XONTRIB_1PASSWORD_ENABLED", True):
             if self.url not in cache:
                 result = subprocess.run(
                     ["op", "read", self.url], capture_output=True, text=True
