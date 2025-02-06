@@ -54,6 +54,12 @@ op item get OpenAI-API-Key --format json | jq '.fields[] | select(.type == "CONC
 # "api-key"
 ```
 
+### Debug mode
+
+```xsh
+$XONTRIB_1PASSWORD_DEBUG = True
+```
+
 ## Known issues
 
 ### Alpha version
