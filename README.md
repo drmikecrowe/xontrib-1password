@@ -22,14 +22,9 @@ The xontrib will get loaded automatically.
 Store your passwords in [1Password](https://1password.com/) and setup [`op` CLI](https://developer.1password.com/docs/cli/) locally.
 Then:
 ```xsh
-$XONTRIB_ONEPASS_ENABLED = True
 $MYKEY = OnePass("op://path/my/key")
 $MYKEY
 # My key value.
-
-$XONTRIB_ONEPASS_ENABLED = False
-$MYKEY
-# op://path/my/key
 ```
 
 ## Examples
@@ -38,11 +33,18 @@ $MYKEY
 
 ## Good to know
 
-### Disable autoloading
+### Disabling
 
+To disable autoloading:
 ```xsh
 $XONTRIBS_AUTOLOAD_DISABLED = ["1password", ]
-# if you have set this for other xontribs, you should append the value
+```
+To turn off:
+```xsh
+$XONTRIB_1PASSWORD_ENABLED = False
+$MYKEY = OnePass("op://path/my/key")
+$MYKEY
+# op://path/my/key
 ```
 
 ### Get certain key
