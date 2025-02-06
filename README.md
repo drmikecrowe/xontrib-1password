@@ -24,11 +24,14 @@ Then:
 ```xsh
 mykey = OnePass("op://path/my/key")
 echo @(mykey)
-# My key value.
+# my-key-value
 
 $MYKEY = OnePass("op://path/my/key")
 echo $MYKEY
-# My key value.
+# my-key-value
+
+env | grep MYKEY
+# MYKEY=my-key-value
 ```
 
 ## Good to know
