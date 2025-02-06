@@ -23,24 +23,16 @@ class OnePass:
                 result = subprocess.run(["op", "read", self.url], capture_output=True, text=True)
                 value = result.stdout.strip()
                 if result.stderr:
-                    print(f"xontrib-1password error for {self.url!r}: {result.stderr}", file=sys.stderr)
+                    print(f"xontrib-1password: {self.url!r}: {result.stderr}", file=sys.stderr)
 
-                if __xonsh__.env.get("XONTRIB_1PASSWORD_DEBUG", False):
-                    print(
-                        "Your 1Password environmental secret "
-                        f"{self.url} is live in your environment",
-                        file=sys.stderr,
-                    )
                 if cache == "all" or (cache == "not_empty" and value):
+                    if __xonsh__.env.get("XONTRIB_1PASSWORD_DEBUG", False):
+                        print(f"xontrib-1password: added {self.url!r} value to cache", file=sys.stderr)
                     _1password_cache[self.url] = value
             return value
         else:
             if self.url in _1password_cache:
                 if __xonsh__.env.get("XONTRIB_1PASSWORD_DEBUG", False):
-                    print(
-                        "Your 1Password environmental secret "
-                        f"{self.url} is no longer in your environment",
-                        file=sys.stderr,
-                    )
+                    print(f"xontrib-1password: removed {self.url!r} value from cache.", file=sys.stderr)
                 del _1password_cache[self.url]
             return self.url
