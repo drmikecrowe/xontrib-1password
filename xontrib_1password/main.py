@@ -1,6 +1,11 @@
 import subprocess
 import sys
 
+
+if not __xonsh__.imp.shutil.which('op'):
+    print('xontrib-1password: OnePassword CLI tool not found. Install: https://developer.1password.com/docs/cli/get-started/', file=sys.stderr)
+
+
 cache = {}
 
 
