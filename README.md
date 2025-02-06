@@ -27,10 +27,6 @@ $MYKEY
 # My key value.
 ```
 
-## Examples
-
-![Example](./1password-example.png)
-
 ## Good to know
 
 ### Disabling
