@@ -69,9 +69,9 @@ You can set `$XONTRIB_1PASSWORD_CACHE` to string:
   
 ## Known issues
 
-### Alpha version
+### Slowing down reading environment variables
 
-This is the initial release of the xontrib. Issues and pull requests are welcome.
+If you disable cache (i.e. `$XONTRIB_1PASSWORD_CACHE='off'`) in case of `$MYVAR = OnePass(...)` every time the shell read the env variables list the value will be requested from OnePassword and it takes time.
 
 ## Development
 
