@@ -22,8 +22,12 @@ The xontrib will get loaded automatically.
 Store your passwords in [1Password](https://1password.com/) and setup [`op` CLI](https://developer.1password.com/docs/cli/) locally.
 Then:
 ```xsh
+mykey = OnePass("op://path/my/key")
+echo @(mykey)
+# My key value.
+
 $MYKEY = OnePass("op://path/my/key")
-$MYKEY
+echo $MYKEY
 # My key value.
 ```
 
