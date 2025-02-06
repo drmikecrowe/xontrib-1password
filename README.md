@@ -60,6 +60,13 @@ op item get OpenAI-API-Key --format json | jq '.fields[] | select(.type == "CONC
 $XONTRIB_1PASSWORD_DEBUG = True
 ```
 
+### Cache
+
+You can set `$XONTRIB_1PASSWORD_CACHE` to string:
+* `not_empty` (default) - cache not empty values.
+* `all` - cache all values.
+* `off` - disable caching.
+  
 ## Known issues
 
 ### Alpha version
