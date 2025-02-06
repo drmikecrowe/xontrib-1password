@@ -41,3 +41,4 @@ class OnePass:
         value = result.stdout.strip()
         if result.stderr:
             print(f"xontrib-1password: {url!r}: {result.stderr}", file=sys.stderr)
+        return value
