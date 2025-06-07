@@ -135,3 +135,5 @@ xontrib/__init__.py
 .copier-answers.yml
 
 .mise.toml
+# SpecStory explanation file
+.specstory/.what-is-this.md

@@ -1,7 +1,6 @@
-
 [tool.poetry]
 name = "xontrib-1password"
-version = "0.1.6"
+version = "0.3.0"
 description = "1password support for xonsh"
 authors = ["Mike Crowe <drmikecrowe@gmail.com>"]
 
@@ -43,7 +42,7 @@ xonsh = ">=0.12.5"
 
 
 [build-system]
-requires = ["poetry-core>=1.3.0"]
+requires = ["poetry-core>=1.3.0", "tomli>=2.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 
