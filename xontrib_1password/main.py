@@ -81,7 +81,7 @@ class OnePass:
                 f"xontrib-1password: (see /tmp/onepass.env) {result.stderr} ",
                 file=sys.stderr,
             )
-            return
+            return None
         lines = result.stdout.strip().split("\n")
         results = {}
         for line in lines:
