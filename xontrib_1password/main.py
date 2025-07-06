@@ -62,7 +62,8 @@ class OnePass:
     def op_read(self) -> dict[str, str] | None:
         """
         Reads all secrets from 1password and returns a dictionary of them.
-        We'll load all secrets from 1password since it's now a single call and there's no additional overhead.
+        We'll load all secrets from 1password since it's now a single call
+        and there's no additional overhead.
         """
         todo = self.all_unloaded_secrets()
         if not todo:
