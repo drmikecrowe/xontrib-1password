@@ -19,6 +19,12 @@ The xontrib will get loaded automatically.
 
 ## Usage
 
+Enable in your [Run Control (RC) file](https://xon.sh/xonshrc.html):
+
+```xsh
+$XONTRIB_1PASSWORD_ENABLED = True
+```
+
 Store your passwords in [1Password](https://1password.com/) and setup [`op` CLI](https://developer.1password.com/docs/cli/) locally.
 Then:
 ```xsh
@@ -55,7 +61,7 @@ $MYKEY
 Because of the URL is basically `op://<Vault>/<title>/<field>` to find this, here's the commands you can use to determine these fields:
 
 ```sh
-op item list --format json | jq '.[].title | select(. | contains("OpenAI"))' 
+op item list --format json | jq '.[].title | select(. | contains("OpenAI"))'
 # "OpenAI-API-Key"
 op item get OpenAI-API-Key --format json | jq '.fields[] | select(.type == "CONCEALED") | .label'
 # "api-key"
@@ -73,7 +79,7 @@ You can set `$XONTRIB_1PASSWORD_CACHE` to string:
 * `not_empty` (default) - cache not empty values.
 * `all` - cache all values.
 * `off` - disable caching.
-  
+
 ## Known issues
 
 ### Slowing down reading environment variables
