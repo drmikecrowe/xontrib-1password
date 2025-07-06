@@ -1,9 +1,11 @@
 import subprocess
 import sys
 
+from xonsh.built_ins import XSH
+
 from xontrib_1password import __version__
 
-if not __xonsh__.imp.shutil.which("op"):  # type: ignore
+if not XSH.imp.shutil.which("op"):  # type: ignore
     print(
         "xontrib-1password: OnePassword CLI tool not found. Install: https://developer.1password.com/docs/cli/get-started/",
         file=sys.stderr,
@@ -27,25 +29,23 @@ class OnePass:
         return self.__repr__()
 
     def enabled(self):
-        enabled = __xonsh__.env.get("XONTRIB_1PASSWORD_ENABLED", False)  # type: ignore
+        enabled = XSH.env.get("XONTRIB_1PASSWORD_ENABLED", False)  # type: ignore
         return enabled
 
     def cache_mode(self):
-        mode = self.enabled() and __xonsh__.env.get(
-            "XONTRIB_1PASSWORD_CACHE", "not_empty"
-        )  # type: ignore
+        mode = self.enabled() and XSH.env.get("XONTRIB_1PASSWORD_CACHE", "not_empty")  # type: ignore
         return mode
 
     def no_cache_mode(self):
         return self.cache_mode() in ["off", False]
 
     def log(self, *args, **kwargs):
-        if self.enabled() and __xonsh__.env.get("XONTRIB_1PASSWORD_DEBUG", False):  # type: ignore
+        if self.enabled() and XSH.env.get("XONTRIB_1PASSWORD_DEBUG", False):  # type: ignore
             print(*args, **kwargs, file=sys.stderr)
 
     def log_once(self, *args, **kwargs):
         global _notifications
-        if not __xonsh__.env.get("XONTRIB_1PASSWORD_ENABLED", False):  # type: ignore
+        if not XSH.env.get("XONTRIB_1PASSWORD_ENABLED", False):  # type: ignore
             return
         msg = " ".join(args)
         if msg not in _notifications:
