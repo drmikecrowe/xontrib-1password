@@ -74,6 +74,7 @@ class OnePass:
         result = subprocess.run(
             ["op", "inject", "-i", "/tmp/onepass.env"],
             capture_output=True,
+            env=XSH.env,
             text=True,
         )
         if result.stderr:
