@@ -1,9 +1,11 @@
 import subprocess
 import sys
 
+from xonsh.built_ins import XSH
+
 from xontrib_1password import __version__
 
-if not __xonsh__.imp.shutil.which("op"):  # type: ignore
+if not XSH.imp.shutil.which("op", path=XSH.env.get("PATH")):  # type: ignore
     print(
         "xontrib-1password: OnePassword CLI tool not found. Install: https://developer.1password.com/docs/cli/get-started/",
         file=sys.stderr,
@@ -27,25 +29,23 @@ class OnePass:
         return self.__repr__()
 
     def enabled(self):
-        enabled = __xonsh__.env.get("XONTRIB_1PASSWORD_ENABLED", False)  # type: ignore
+        enabled = XSH.env.get("XONTRIB_1PASSWORD_ENABLED", False)  # type: ignore
         return enabled
 
     def cache_mode(self):
-        mode = self.enabled() and __xonsh__.env.get(
-            "XONTRIB_1PASSWORD_CACHE", "not_empty"
-        )  # type: ignore
+        mode = self.enabled() and XSH.env.get("XONTRIB_1PASSWORD_CACHE", "not_empty")  # type: ignore
         return mode
 
     def no_cache_mode(self):
         return self.cache_mode() in ["off", False]
 
     def log(self, *args, **kwargs):
-        if self.enabled() and __xonsh__.env.get("XONTRIB_1PASSWORD_DEBUG", False):  # type: ignore
+        if self.enabled() and XSH.env.get("XONTRIB_1PASSWORD_DEBUG", False):  # type: ignore
             print(*args, **kwargs, file=sys.stderr)
 
     def log_once(self, *args, **kwargs):
         global _notifications
-        if not __xonsh__.env.get("XONTRIB_1PASSWORD_ENABLED", False):  # type: ignore
+        if not XSH.env.get("XONTRIB_1PASSWORD_ENABLED", False):  # type: ignore
             return
         msg = " ".join(args)
         if msg not in _notifications:
@@ -62,7 +62,8 @@ class OnePass:
     def op_read(self) -> dict[str, str] | None:
         """
         Reads all secrets from 1password and returns a dictionary of them.
-        We'll load all secrets from 1password since it's now a single call and there's no additional overhead.
+        We'll load all secrets from 1password since it's now a single call
+        and there's no additional overhead.
         """
         todo = self.all_unloaded_secrets()
         if not todo:
@@ -73,6 +74,7 @@ class OnePass:
         result = subprocess.run(
             ["op", "inject", "-i", "/tmp/onepass.env"],
             capture_output=True,
+            env=XSH.env,
             text=True,
         )
         if result.stderr:
@@ -80,7 +82,7 @@ class OnePass:
                 f"xontrib-1password: (see /tmp/onepass.env) {result.stderr} ",
                 file=sys.stderr,
             )
-            return
+            return None
         lines = result.stdout.strip().split("\n")
         results = {}
         for line in lines:
