@@ -19,7 +19,7 @@ The xontrib will get loaded automatically.
 
 ## Usage
 
-Enable in your [Run Control (RC) file](https://xon.sh/xonshrc.html):
+For maximum security, enable your secrets dynamically using the command below when required. You may also enable permanently and expose your secrets at all times in your [Run Control (RC) file](https://xon.sh/xonshrc.html):
 
 ```xsh
 $XONTRIB_1PASSWORD_ENABLED = True
