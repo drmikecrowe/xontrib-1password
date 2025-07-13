@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "xontrib-1password"
-version = "0.3.1"
+version = "0.3.2"
 description = "1password support for xonsh"
 authors = ["Mike Crowe <drmikecrowe@gmail.com>"]
 
