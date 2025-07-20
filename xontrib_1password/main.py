@@ -5,7 +5,7 @@ from xonsh.built_ins import XSH
 
 from xontrib_1password import __version__
 
-if not XSH.imp.shutil.which("op", path=XSH.env.get("PATH")):  # type: ignore
+if not XSH.imp.shutil.which("op", path=XSH.env.get_detyped("PATH")):  # type: ignore
     print(
         "xontrib-1password: OnePassword CLI tool not found. Install: https://developer.1password.com/docs/cli/get-started/",
         file=sys.stderr,
@@ -74,7 +74,7 @@ class OnePass:
         result = subprocess.run(
             ["op", "inject", "-i", "/tmp/onepass.env"],
             capture_output=True,
-            env=XSH.env,
+            env=XSH.env.detype_all(),
             text=True,
         )
         if result.stderr:
